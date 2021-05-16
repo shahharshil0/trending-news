@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/newsListFragment"
         android:name="com.harshil.trendingnews.ui.newslist.NewsListFragment"
-        android:label="fragment_news_list"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_news_list">
         <action
             android:id="@+id/action_newsListFragment_to_newsDetailFragment"
@@ -17,6 +17,12 @@
     <fragment
         android:id="@+id/newsDetailFragment"
         android:name="com.harshil.trendingnews.ui.newsdetail.NewsDetailFragment"
-        android:label="fragment_news_detail"
-        tools:layout="@layout/fragment_news_detail" />
+        android:label="@string/news_detail"
+        tools:layout="@layout/fragment_news_detail">
+        <argument
+            android:name="article"
+            android:defaultValue="@null"
+            app:argType="com.harshil.trendingnews.data.Article"
+            app:nullable="true" />
+    </fragment>
 </navigation>

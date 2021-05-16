@@ -12,22 +12,22 @@ import com.harshil.trendingnews.data.ArticleRemoteKey
 interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticles(list: List<Article>)
+    suspend fun insertTopHeadlines(list: List<Article>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticleSingle(article: Article)
+    suspend fun insertTopHeadlines(article: Article)
 
     @Query("SELECT * FROM Article ")
-    fun getAllArticles(): PagingSource<Int, Article>
+    fun getAllTopHeadlines(): PagingSource<Int, Article>
 
     @Query("DELETE FROM Article")
-    suspend fun deleteAllArticles()
+    suspend fun deleteAllTopHeadlines()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllRemoteKeys(list: List<ArticleRemoteKey>)
 
     @Query("SELECT * FROM ArticleRemoteKey WHERE id = :id")
-    suspend fun getAllREmoteKey(id: String): ArticleRemoteKey?
+    suspend fun getRemoteKey(id: String): ArticleRemoteKey?
 
     @Query("DELETE FROM ArticleRemoteKey")
     suspend fun deleteAllRemoteKeys()

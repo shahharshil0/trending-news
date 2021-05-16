@@ -1,6 +1,7 @@
 package com.harshil.trendingnews.network
 
 import com.harshil.trendingnews.data.NewsResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,5 +14,5 @@ interface TrendingNewsApiInterface {
     suspend fun getAllTopHeadlines(
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
-    ): NewsResponse
+    ): Response<NewsResponse>
 }

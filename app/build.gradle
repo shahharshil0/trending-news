@@ -114,4 +114,7 @@ dependencies {
 
     //paging
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    //coil - image loading
+    implementation "io.coil-kt:coil:$coil_version"
 }
