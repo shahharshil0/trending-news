@@ -32,4 +32,6 @@ interface NewsDao {
     @Query("DELETE FROM ArticleRemoteKey")
     suspend fun deleteAllRemoteKeys()
 
+    @Query("SELECT COUNT(*) FROM ARTICLE")
+    suspend fun getTopHeadlinesCount(): Int
 }

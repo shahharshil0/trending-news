@@ -75,9 +75,9 @@ class NewsListRemoteMediator(
                 MediatorResult.Success(endOfPaginationReached = true)
             }
         } catch (exception: IOException) {
-            MediatorResult.Error(exception)
+            handleError(exception, loadType)
         } catch (exception: HttpException) {
-            MediatorResult.Error(exception)
+            handleError(exception, loadType)
         }
     }
 
@@ -99,6 +99,17 @@ class NewsListRemoteMediator(
                 )
                 prevKey
             }
+        }
+    }
+
+    /**
+     * if there is no data in the database return error else return the db data
+     */
+    private suspend fun handleError(exception: Throwable, loadType: LoadType): MediatorResult {
+        return if (newsDao.getTopHeadlinesCount() > 0 && loadType == LoadType.REFRESH) {
+            MediatorResult.Success(endOfPaginationReached = true)
+        } else {
+            MediatorResult.Error(exception)
         }
     }
 

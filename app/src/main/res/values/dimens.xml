@@ -9,4 +9,6 @@
     <dimen name="d_4">4dp</dimen>
     <dimen name="d_16">16dp</dimen>
     <dimen name="s_16">16sp</dimen>
+    <dimen name="d_50">50dp</dimen>
+    <dimen name="error_text_size">20sp</dimen>
 </resources>

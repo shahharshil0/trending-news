@@ -24,8 +24,9 @@ class NewsListRepository @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
-                prefetchDistance = 2,
-                enablePlaceholders = false
+                prefetchDistance = 1,
+                enablePlaceholders = false,
+                initialLoadSize = 10
             ),
             remoteMediator = NewsListRemoteMediator(
                 newsDao = newsDatabase.newsDao(),

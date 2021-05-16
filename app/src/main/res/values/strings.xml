@@ -3,4 +3,6 @@
     <string name="news_image">News Image</string>
     <string name="read_more">Read More…</string>
     <string name="news_detail">News Detail</string>
+    <string name="retry">Retry</string>
+    <string name="empty">No results found</string>
 </resources>

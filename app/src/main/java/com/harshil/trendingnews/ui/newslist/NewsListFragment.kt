@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harshil.trendingnews.base.BaseFragment
 import com.harshil.trendingnews.data.Article
@@ -69,7 +73,44 @@ class NewsListFragment : BaseFragment(), NewsListInteractor {
         //setup news list recyclerview
         binding.rvNewsList.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            this.adapter = this@NewsListFragment.adapter
+            this.adapter = this@NewsListFragment.adapter.withLoadStateHeaderAndFooter(
+                header = NewsListLoadStateAdapter { this@NewsListFragment.adapter.retry() },
+                footer = NewsListLoadStateAdapter { this@NewsListFragment.adapter.retry() }
+            )
+        }
+
+        //add load states to adapter
+        adapter.addLoadStateListener { loadState ->
+            val refreshState = loadState.mediator?.refresh
+            binding.rvNewsList.isVisible = refreshState is LoadState.NotLoading
+            binding.progressBar.isVisible = refreshState is LoadState.Loading
+            binding.swipeRefresh.isRefreshing =
+                refreshState is LoadState.Loading && !binding.swipeRefresh.isVisible
+            binding.retryButton.isVisible = refreshState is LoadState.Error
+            handleError(loadState)
+
+            //no result state
+            binding.tvEmpty.isVisible =
+                loadState.source.refresh is LoadState.NotLoading &&
+                        loadState.append.endOfPaginationReached &&
+                        adapter.itemCount < 1
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            adapter.refresh()
+        }
+
+        binding.retryButton.setOnClickListener {
+            adapter.retry()
+        }
+    }
+
+    private fun handleError(loadState: CombinedLoadStates) {
+        val errorState = loadState.source.append as? LoadState.Error
+            ?: loadState.source.prepend as? LoadState.Error
+
+        errorState?.let {
+            Toast.makeText(requireContext(), "${it.error}", Toast.LENGTH_LONG).show()
         }
     }
     //endregion
