@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_news_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/card_default_radius"
+    app:cardElevation="@dimen/card_default_elevation"
+    app:cardUseCompatPadding="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/news_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/teal_200" />
+
+        <TextView
+            android:id="@+id/tv_news_headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/news_list_content_side_padding"
+            android:layout_marginTop="@dimen/news_list_content_top_bottom_padding"
+            android:layout_marginEnd="@dimen/news_list_content_side_padding"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:minLines="3"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="New Headline" />
+
+        <TextView
+            android:id="@+id/tv_news_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_12"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:minLines="3"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="@id/tv_news_headline"
+            app:layout_constraintStart_toStartOf="@id/tv_news_headline"
+            app:layout_constraintTop_toBottomOf="@id/tv_news_headline"
+            tools:text="News Description" />
+
+        <TextView
+            android:id="@+id/tv_news_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="@dimen/news_list_content_top_bottom_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_news_headline"
+            app:layout_constraintTop_toBottomOf="@id/tv_news_description"
+            tools:text="Times Of India" />
+
+        <TextView
+            android:id="@+id/tv_publish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_news_source"
+            app:layout_constraintEnd_toEndOf="@id/tv_news_headline"
+            app:layout_constraintTop_toTopOf="@id/tv_news_source"
+            tools:text="10th May 2021" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
